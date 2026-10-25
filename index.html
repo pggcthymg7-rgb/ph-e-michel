@@ -1,415 +1,1298 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="theme-color" content="#09090B">
+    <meta name="description" content="Ecossistema oficial da dupla PH e Michel. Gestão, orçamentos, roteiros e logística de shows.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>PH e Michel | Ecossistema Oficial & Backstage Hub</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        gold: { 300:'#FDE68A',400:'#FBBF24',500:'#F59E0B',600:'#D97706' },
+                        stage: { 950:'#09090B',900:'#121216',800:'#1C1C22',700:'#272730' }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --bg-stage-950: #09090B;
-            --bg-stage-900: #121216;
-            --bg-stage-800: #1C1C22;
-            --bg-stage-700: #272730;
-            --gold-300: #FDE68A;
-            --gold-400: #FBBF24;
-            --gold-500: #F59E0B;
-            --gold-600: #D97706;
-            --text-main: #F4F4F5;
-            --text-muted: #A1A1AA;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { -webkit-tap-highlight-color: transparent; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-stage-950);
-            color: var(--text-main);
+            background-color: #09090B;
+            color: #F4F4F5;
             overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            padding-bottom: env(safe-area-inset-bottom);
+            -webkit-font-smoothing: antialiased;
         }
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 40;
-            background-color: rgba(9, 9, 11, 0.9);
+        .glass-card {
+            background: rgba(24, 24, 30, 0.78);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(39, 39, 48, 0.8);
+            border: 1px solid rgba(251, 191, 36, 0.14);
         }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        .header-content {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.75rem 0;
-            gap: 0.75rem;
-        }
-
-        .brand-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .brand-logo {
-            width: 2.75rem;
-            height: 2.75rem;
-            border-radius: 0.75rem;
-            background: linear-gradient(135deg, var(--gold-400) 0%, var(--gold-600) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.2);
-            font-weight: 900;
-            color: #000;
-            font-size: 1.125rem;
-            letter-spacing: -0.05em;
-        }
-
-        .brand-title {
-            font-weight: 800;
-            font-size: 1.125rem;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .badge {
-            font-size: 0.6875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 0.125rem 0.5rem;
-            border-radius: 9999px;
-            background: rgba(245, 158, 11, 0.15);
-            color: var(--gold-400);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-        }
-
-        .brand-subtitle {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 0.125rem;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 0.375rem;
-            overflow-x: auto;
-            max-width: 100%;
-            padding: 0.25rem 0;
-        }
-
-        .tab-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 0.875rem;
-            border-radius: 0.75rem;
-            font-size: 0.8125rem;
-            font-weight: 600;
-            border: 1px solid #272730;
-            background: transparent;
-            color: var(--text-muted);
-            cursor: pointer;
+        .glass-card-hover:hover {
+            border-color: rgba(251, 191, 36, 0.4);
+            transform: translateY(-2px);
             transition: all 0.2s ease;
-            white-space: nowrap;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #D97706 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-gradient-bg { background: linear-gradient(135deg, #FBBF24 0%, #D97706 100%); }
+
+        /* Hero gradient sem imagem pesada */
+        .hero-bg {
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(245, 158, 11, 0.35) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 70%, rgba(217, 119, 6, 0.30) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 100%, rgba(120, 53, 15, 0.45) 0%, transparent 60%),
+                linear-gradient(160deg, #0a0a0d 0%, #1a0f08 50%, #09090B 100%);
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 1px 1px, rgba(251, 191, 36, 0.08) 1px, transparent 0);
+            background-size: 24px 24px;
+            opacity: 0.6;
+            pointer-events: none;
         }
 
-        .tab-btn:hover {
-            color: #fff;
-            border-color: #3f3f46;
-        }
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #121216; }
+        ::-webkit-scrollbar-thumb { background: #272730; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #F59E0B; }
+
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
         .tab-btn.active {
             background: linear-gradient(135deg, rgba(251, 191, 36, 0.18) 0%, rgba(217, 119, 6, 0.08) 100%);
-            border-color: var(--gold-500);
-            color: var(--gold-400);
+            border-color: #F59E0B;
+            color: #FBBF24;
         }
 
-        .social-links {
-            display: none;
-            align-items: center;
-            gap: 0.5rem;
+        /* === iOS: previne zoom ao focar input === */
+        @media (max-width: 640px) {
+            input, select, textarea { font-size: 16px !important; }
         }
 
-        @media (min-width: 1280px) {
-            .social-links {
-                display: flex;
+        /* Modais full-screen no mobile */
+        .modal-shell {
+            height: 100vh;
+            height: 100dvh;
+            max-height: 100dvh;
+        }
+
+        /* Botões com min touch target */
+        button, a[role="button"] { min-height: 40px; }
+        .touch-lg { min-height: 44px; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
             }
         }
 
-        .social-btn {
-            font-size: 0.75rem;
-            padding: 0.375rem 0.75rem;
-            border-radius: 0.5rem;
-            background: var(--bg-stage-900);
-            color: var(--text-muted);
-            border: 1px solid #272730;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.375rem;
-            transition: all 0.2s;
-        }
-
-        .social-btn.highlight {
-            color: var(--gold-400);
-            border-color: rgba(245, 158, 11, 0.3);
-        }
-
-        main {
-            flex: 1;
-            max-width: 1280px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 1.5rem 1rem;
-        }
-
-        .space-y-8 > * + * {
-            margin-top: 2rem;
-        }
-
-        .hero-banner {
-            position: relative;
-            border-radius: 1.5rem;
-            overflow: hidden;
-            border: 1px solid rgba(245, 158, 11, 0.2);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-        }
-
-        .hero-banner img {
-            width: 100%;
-            height: 18rem;
-            object-fit: cover;
-            display: block;
-        }
-
-        @media (min-width: 640px) {
-            .hero-banner img {
-                height: 24rem;
-            }
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, var(--bg-stage-950) 0%, rgba(9, 9, 11, 0.6) 60%, transparent 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 1.5rem;
-        }
-
-        @media (min-width: 640px) {
-            .hero-overlay {
-                padding: 2.5rem;
-            }
-        }
-
-        .hero-content {
-            max-width: 48rem;
-        }
-
-        .hero-badge {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--gold-400);
-            background: rgba(245, 158, 11, 0.2);
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            display: inline-block;
-            margin-bottom: 0.75rem;
-        }
-
-        h1 {
-            font-size: 1.875rem;
-            font-weight: 900;
-            color: #fff;
-            letter-spacing: -0.025em;
-            margin-bottom: 0.5rem;
-        }
-
-        @media (min-width: 640px) {
-            h1 {
-                font-size: 3rem;
-            }
-        }
-
-        .gold-gradient-text {
-            background: linear-gradient(135deg, var(--gold-300) 0%, var(--gold-500) 50%, var(--gold-600) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-desc {
-            font-size: 0.875rem;
-            color: #d4d4d8;
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
-        }
-
-        @media (min-width: 640px) {
-            .hero-desc {
-                font-size: 1rem;
-            }
-        }
-
-        .btn-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-
-        .btn-gold {
-            background: linear-gradient(135deg, var(--gold-400) 0%, var(--gold-600) 100%);
-            color: #000;
-            font-weight: 800;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.25);
-            text-decoration: none;
-            font-size: 0.875rem;
-            transition: opacity 0.2s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-gold:hover {
-            opacity: 0.95;
-        }
-
-        .btn-whatsapp {
-            background: rgba(24, 24, 30, 0.9);
-            color: #fff;
-            font-weight: 600;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.75rem;
-            border: 1px solid #3f3f46;
-            text-decoration: none;
-            font-size: 0.875rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: background 0.2s;
-        }
-
-        .btn-whatsapp:hover {
-            background: #272730;
-        }
-
-        .success-box {
-            text-align: center;
-            padding: 3rem 1rem;
-            color: var(--text-muted);
-        }
-
-        footer {
-            background-color: var(--bg-stage-950);
-            border-top: 1px solid rgba(39, 39, 48, 0.8);
-            padding: 2rem 0;
-            margin-top: auto;
-            text-align: center;
-            font-size: 0.75rem;
-            color: #71717a;
-        }
+        /* Fix Safari iOS 100vh */
+        .min-h-dvh { min-height: 100vh; min-height: 100dvh; }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col selection:bg-amber-500 selection:text-black">
 
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="brand-wrapper">
-                    <div class="brand-logo">PHeM</div>
-                    <div>
-                        <div class="brand-title">
-                            <span>PH & MICHEL</span>
-                            <span class="badge">Ecossistema 360°</span>
+    <!-- Toast -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-[100] flex flex-col gap-2 pointer-events-none px-3"></div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-stage-950/95 backdrop-blur-md border-b border-zinc-800/80">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap items-center justify-between py-2.5 gap-2">
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <div class="w-10 h-10 rounded-xl gold-gradient-bg flex items-center justify-center shadow-lg shadow-amber-500/20 font-black text-black text-sm tracking-tighter shrink-0">
+                        PHeM
+                    </div>
+                    <div class="min-w-0">
+                        <div class="flex items-center gap-1.5 flex-wrap">
+                            <span class="font-extrabold text-sm sm:text-lg tracking-tight text-white whitespace-nowrap">PH & MICHEL</span>
+                            <span class="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30 whitespace-nowrap">360°</span>
                         </div>
-                        <p class="brand-subtitle">Goiânia - GO • No Ponto com PHeM • Gestão & Contratação</p>
+                        <p class="text-[10px] sm:text-xs text-zinc-400 truncate">Goiânia - GO • No Ponto com PHeM</p>
                     </div>
                 </div>
-
-                <nav aria-label="Navegação Principal">
-                    <button class="tab-btn active">
-                        <span>Vitrine & Orçamento</span>
-                    </button>
-                    <button class="tab-btn">
-                        <span>Estúdio do PH (Roteiros)</span>
-                    </button>
-                    <button class="tab-btn">
-                        <span>Agenda & Logística</span>
-                    </button>
-                    <button class="tab-btn">
-                        <span>Setlist & Palco</span>
-                    </button>
-                </nav>
-
-                <div class="social-links">
-                    <a href="https://www.instagram.com/phemichel" target="_blank" rel="noopener noreferrer" class="social-btn">
-                        <span>@phemichel</span>
-                    </a>
-                    <a href="https://www.instagram.com/ph_phem" target="_blank" rel="noopener noreferrer" class="social-btn highlight">
-                        <span>@ph_phem</span>
-                    </a>
+                <div class="hidden xl:flex items-center gap-2">
+                    <a href="https://www.instagram.com/phemichel" target="_blank" rel="noopener noreferrer" class="text-xs px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 transition">@phemichel</a>
+                    <a href="https://www.instagram.com/ph_phem" target="_blank" rel="noopener noreferrer" class="text-xs px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-amber-400 border border-amber-500/30 transition">@ph_phem</a>
                 </div>
             </div>
+
+            <!-- Nav Tabs: scroll horizontal no mobile -->
+            <nav class="flex items-center gap-1.5 overflow-x-auto scrollbar-hide py-1.5 -mx-1 px-1" aria-label="Navegação Principal">
+                <button id="nav-vitrine" data-tab="vitrine" class="tab-btn active flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-zinc-800 text-zinc-300 hover:text-white transition whitespace-nowrap shrink-0">
+                    <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+                    <span>Vitrine</span>
+                </button>
+                <button id="nav-conteudo" data-tab="conteudo" class="tab-btn flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-zinc-800 text-zinc-300 hover:text-white transition whitespace-nowrap shrink-0">
+                    <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                    <span>Estúdio PH</span>
+                </button>
+                <button id="nav-logistica" data-tab="logistica" class="tab-btn flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-zinc-800 text-zinc-300 hover:text-white transition whitespace-nowrap shrink-0">
+                    <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+                    <span>Logística</span>
+                </button>
+                <button id="nav-repertorio" data-tab="repertorio" class="tab-btn flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border border-zinc-800 text-zinc-300 hover:text-white transition whitespace-nowrap shrink-0">
+                    <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+                    <span>Setlist</span>
+                </button>
+            </nav>
         </div>
     </header>
 
-    <main>
-        <section class="space-y-8">
-            <div class="hero-banner">
-                <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80" alt="Palco PH e Michel">
-                <div class="hero-overlay">
-                    <div class="hero-content">
-                        <span class="hero-badge">Show & Entretenimento</span>
-                        <h1>PH & MICHEL <span class="gold-gradient-text">No Ponto</span></h1>
-                        <p class="hero-desc">Contrate o show que está movimentando o cenário sertanejo em Goiânia e região. Estrutura completa, repertório atualizado e profissionalismo.</p>
-                        <div class="btn-group">
-                            <a href="#orcamento-box" class="btn-gold">Simular Orçamento</a>
-                            <a href="https://wa.me/5562999999999" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
-                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                                <span>WhatsApp Comercial</span>
-                            </a>
+    <!-- Main -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
+
+        <!-- TAB 1: VITRINE -->
+        <section id="tab-vitrine" class="space-y-6 sm:space-y-8">
+            <!-- HERO (sem base64, gradiente premium) -->
+            <div class="relative rounded-3xl overflow-hidden border border-amber-500/30 shadow-2xl">
+                <div class="hero-bg relative w-full h-80 sm:h-96">
+                    <div class="absolute inset-0 bg-gradient-to-t from-stage-950 via-stage-950/70 to-transparent"></div>
+
+                    <!-- Badge flutuante -->
+                    <div class="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 text-[10px] sm:text-xs font-semibold">
+                        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                        <span>+18M Views</span>
+                    </div>
+
+                    <div class="absolute inset-0 flex flex-col justify-end p-4 sm:p-8">
+                        <div class="max-w-2xl space-y-3">
+                            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-[10px] sm:text-xs font-semibold backdrop-blur-md">
+                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                                Turnê "No Ponto com PHeM" • Goiânia para o Brasil
+                            </div>
+                            <h1 class="text-2xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+                                A energia que conquistou Goiânia, <span class="gold-gradient-text">agora no palco do seu evento.</span>
+                            </h1>
+                            <p class="text-xs sm:text-base text-zinc-300 max-w-2xl hidden sm:block">
+                                Com mais de <strong class="text-amber-300">18 milhões de visualizações</strong> e sucessos como <em>"Só Falta Nóis Namorar"</em>, <em>"Dona Onça"</em> e <em>"Arranhado Novo"</em>, <strong>PH e Michel</strong> entregam uma experiência inesquecível.
+                            </p>
+                            <div class="pt-1 flex flex-wrap gap-2">
+                                <button id="btn-scroll-orcamento" class="touch-lg gold-gradient-bg text-black font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg shadow-amber-500/25 hover:brightness-110 active:scale-[0.98] transition flex items-center gap-1.5">
+                                    <span>Simular Orçamento</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                                </button>
+                                <button id="btn-go-ph-studio" class="touch-lg bg-zinc-900/90 hover:bg-zinc-800 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-zinc-700 active:scale-[0.98] transition">
+                                    Painel do PH
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="success-box">
-                <p>Ecossistema Oficial carregado perfeitamente no GitHub Pages!</p>
+            <!-- Stats -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                <div class="glass-card p-4 sm:p-5 rounded-2xl">
+                    <p class="text-[10px] sm:text-xs font-medium text-zinc-400 uppercase tracking-wider">Alcance Orgânico</p>
+                    <p class="text-xl sm:text-3xl font-black text-amber-400 mt-1">+18M</p>
+                    <p class="text-[10px] sm:text-xs text-zinc-500 mt-1 leading-tight">Views na série viral (G1 Goiás)</p>
+                </div>
+                <div class="glass-card p-4 sm:p-5 rounded-2xl">
+                    <p class="text-[10px] sm:text-xs font-medium text-zinc-400 uppercase tracking-wider">Audiovisual</p>
+                    <p class="text-base sm:text-2xl font-black text-white mt-1">No Ponto</p>
+                    <p class="text-[10px] sm:text-xs text-zinc-500 mt-1 leading-tight">Ao Vivo + DVD Nova História</p>
+                </div>
+                <div class="glass-card p-4 sm:p-5 rounded-2xl">
+                    <p class="text-[10px] sm:text-xs font-medium text-zinc-400 uppercase tracking-wider">Formatos</p>
+                    <p class="text-xl sm:text-3xl font-black text-white mt-1">3</p>
+                    <p class="text-[10px] sm:text-xs text-zinc-500 mt-1 leading-tight">Banda, Sunset & Acústico</p>
+                </div>
+                <div class="glass-card p-4 sm:p-5 rounded-2xl">
+                    <p class="text-[10px] sm:text-xs font-medium text-zinc-400 uppercase tracking-wider">Base</p>
+                    <p class="text-base sm:text-2xl font-black text-amber-400 mt-1">Goiânia</p>
+                    <p class="text-[10px] sm:text-xs text-zinc-500 mt-1 leading-tight">Atendimento nacional</p>
+                </div>
+            </div>
+
+            <!-- Orçamento -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start" id="secao-orcamento">
+                <div class="lg:col-span-7 glass-card rounded-3xl p-4 sm:p-8 border border-amber-500/30">
+                    <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-zinc-800">
+                        <div class="min-w-0">
+                            <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-amber-400">Simulador Comercial</span>
+                            <h2 class="text-lg sm:text-2xl font-bold text-white mt-0.5">Gerador de Proposta</h2>
+                        </div>
+                        <div class="flex items-center gap-1 bg-zinc-900 p-1 rounded-xl border border-zinc-800">
+                            <button id="mode-contratante" class="px-2.5 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-amber-500 text-black transition">Contratante</button>
+                            <button id="mode-socio" class="px-2.5 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold text-zinc-400 hover:text-white transition">Sócio</button>
+                        </div>
+                    </div>
+
+                    <p id="quote-mode-desc" class="text-[11px] sm:text-xs text-zinc-400 mt-3">
+                        Preencha os dados para gerar a estimativa logística e enviar o pedido estruturado para o escritório.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                        <div>
+                            <label class="block text-[11px] font-semibold text-zinc-300 mb-1" for="q-nome">Contratante / Empresa</label>
+                            <input id="q-nome" type="text" value="Roberto Almeida (Eventos Vip)" class="w-full bg-zinc-900/90 border border-zinc-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-zinc-300 mb-1" for="q-data">Data</label>
+                            <input id="q-data" type="date" value="2026-11-21" class="w-full bg-zinc-900/90 border border-zinc-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-zinc-300 mb-1" for="q-cidade">Cidade / UF</label>
+                            <input id="q-cidade" type="text" value="Brasília - DF" class="w-full bg-zinc-900/90 border border-zinc-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-zinc-300 mb-1" for="q-distancia">Distância de Goiânia (km)</label>
+                            <input id="q-distancia" type="number" min="0" max="3000" value="210" class="w-full bg-zinc-900/90 border border-zinc-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-zinc-300 mb-1" for="q-tipo">Tipo de Evento</label>
+                            <select id="q-tipo" class="w-full bg-zinc-900/90 border border-zinc-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                                <option>Casamento / Festa Particular</option>
+                                <option>Formatura / Universitário</option>
+                                <option>Casa de Show / Boate / Bar</option>
+                                <option>Evento Corporativo</option>
+                                <option>Prefeitura / Exposição</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-zinc-300 mb-1" for="q-formato">Formato</label>
+                            <select id="q-formato" class="w-full bg-zinc-900/90 border border-zinc-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                                <option value="completo">Banda Completa (12 pessoas)</option>
+                                <option value="resenha">No Ponto / Resenha (7 pessoas)</option>
+                                <option value="acustico">Pocket Acústico VIP (5 pessoas)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-zinc-300 mb-1" for="q-publico">Público</label>
+                            <select id="q-publico" class="w-full bg-zinc-900/90 border border-zinc-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                                <option>Até 300 pessoas</option>
+                                <option selected>300 a 1.000 pessoas</option>
+                                <option>1.000 a 5.000 pessoas</option>
+                                <option>Acima de 5.000 pessoas</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-zinc-300 mb-1" for="q-som">Som & Iluminação</label>
+                            <select id="q-som" class="w-full bg-zinc-900/90 border border-zinc-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                                <option value="contratante">Por conta do Contratante</option>
+                                <option value="incluso">Incluir Pacote (+ R$ 4.500)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="socio-controls" class="hidden mt-4 p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 space-y-2.5">
+                        <div class="flex items-center justify-between flex-wrap gap-1">
+                            <span class="text-[11px] font-bold text-amber-300 uppercase tracking-wider">Painel do Sócio</span>
+                            <span class="text-[10px] text-amber-200/80">Ajuste fino</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                            <div>
+                                <label class="block text-[10px] text-zinc-300 mb-1" for="q-cache-custom">Cachê Base (R$)</label>
+                                <input id="q-cache-custom" type="number" step="500" value="18000" class="w-full bg-zinc-950 border border-amber-500/40 rounded-lg px-2.5 py-1.5 text-sm text-amber-300 font-bold">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] text-zinc-300 mb-1" for="q-km-rate">R$/KM</label>
+                                <input id="q-km-rate" type="number" step="0.5" value="5.5" class="w-full bg-zinc-950 border border-amber-500/40 rounded-lg px-2.5 py-1.5 text-sm text-amber-300 font-bold">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] text-zinc-300 mb-1" for="q-diaria-rate">Diária (R$)</label>
+                                <input id="q-diaria-rate" type="number" step="10" value="120" class="w-full bg-zinc-950 border border-amber-500/40 rounded-lg px-2.5 py-1.5 text-sm text-amber-300 font-bold">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 p-4 rounded-2xl bg-zinc-950/90 border border-zinc-800 space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div>
+                                <p class="text-[11px] text-zinc-400">Total Estimado</p>
+                                <p id="q-total-display" class="text-2xl sm:text-3xl font-black text-amber-400">R$ 0</p>
+                            </div>
+                            <div class="text-right">
+                                <span id="q-equipe-badge" class="inline-block text-[10px] font-semibold px-2.5 py-1 rounded-full bg-zinc-900 text-zinc-300 border border-zinc-700">Equipe: 12</span>
+                                <p id="q-hotel-badge" class="text-[10px] text-zinc-400 mt-1">—</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 pt-2 border-t border-zinc-800/80 text-[10px] sm:text-xs">
+                            <div class="p-2 rounded-xl bg-zinc-900/70">
+                                <span class="text-zinc-400 block">Cachê</span>
+                                <strong id="q-val-cache" class="text-white text-xs sm:text-sm">—</strong>
+                            </div>
+                            <div class="p-2 rounded-xl bg-zinc-900/70">
+                                <span class="text-zinc-400 block">Transporte</span>
+                                <strong id="q-val-transporte" class="text-white text-xs sm:text-sm">—</strong>
+                            </div>
+                            <div class="p-2 rounded-xl bg-zinc-900/70">
+                                <span class="text-zinc-400 block">Diárias</span>
+                                <strong id="q-val-diarias" class="text-white text-xs sm:text-sm">—</strong>
+                            </div>
+                            <div class="p-2 rounded-xl bg-zinc-900/70">
+                                <span class="text-zinc-400 block">Sinal 50%</span>
+                                <strong id="q-val-sinal" class="text-amber-400 text-xs sm:text-sm">—</strong>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-semibold text-zinc-400 mb-1" for="q-preview-text">Proposta (WhatsApp):</label>
+                            <textarea id="q-preview-text" rows="6" readonly class="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-2.5 text-[11px] text-zinc-300 font-mono focus:outline-none resize-none"></textarea>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 pt-1">
+                            <button id="btn-whatsapp-quote" class="touch-lg flex-1 min-w-[160px] gold-gradient-bg text-black font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl shadow-lg shadow-amber-500/20 hover:brightness-110 active:scale-[0.98] transition">
+                                Enviar no WhatsApp
+                            </button>
+                            <button id="btn-copy-quote" class="touch-lg bg-zinc-900 hover:bg-zinc-800 text-white font-semibold text-xs sm:text-sm py-2.5 px-3 rounded-xl border border-zinc-700 active:scale-[0.98] transition">
+                                Copiar
+                            </button>
+                            <button id="btn-save-lead-agenda" class="touch-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 font-semibold text-xs sm:text-sm py-2.5 px-3 rounded-xl border border-emerald-500/30 active:scale-[0.98] transition">
+                                + Agenda
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna direita -->
+                <div class="lg:col-span-5 space-y-4 sm:space-y-6">
+                    <div class="glass-card rounded-3xl p-4 sm:p-6 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-base sm:text-lg font-bold text-white">Sucessos & Clipes</h3>
+                            <a href="https://www.youtube.com/phemichel" target="_blank" rel="noopener noreferrer" class="text-[11px] text-amber-400 hover:underline">YouTube →</a>
+                        </div>
+                        <div class="space-y-2">
+                            <a href="https://www.youtube.com/watch?v=NKtcpB1cUlc" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-2xl bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 transition">
+                                <div class="flex items-center gap-2.5 min-w-0">
+                                    <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold shrink-0">▶</div>
+                                    <div class="min-w-0">
+                                        <p class="text-xs sm:text-sm font-bold text-white truncate">Só Falta Nóis Namorar</p>
+                                        <p class="text-[10px] text-zinc-400 truncate">No Ponto com PHeM</p>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 font-medium shrink-0">Hit</span>
+                            </a>
+                            <a href="https://www.youtube.com/watch?v=fElHq7XvMns" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-2xl bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 transition">
+                                <div class="flex items-center gap-2.5 min-w-0">
+                                    <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold shrink-0">▶</div>
+                                    <div class="min-w-0">
+                                        <p class="text-xs sm:text-sm font-bold text-white truncate">Dona Onça</p>
+                                        <p class="text-[10px] text-zinc-400 truncate">Ao Vivo em Goiânia</p>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-300 font-medium shrink-0">Live</span>
+                            </a>
+                            <a href="https://www.youtube.com/watch?v=MwoCY7hiuP0" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-2xl bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 transition">
+                                <div class="flex items-center gap-2.5 min-w-0">
+                                    <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold shrink-0">▶</div>
+                                    <div class="min-w-0">
+                                        <p class="text-xs sm:text-sm font-bold text-white truncate">Arranhado Novo</p>
+                                        <p class="text-[10px] text-zinc-400 truncate">Pra Tomar Todas</p>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-300 font-medium shrink-0">Modão</span>
+                            </a>
+                            <a href="https://g1.globo.com/go/goias/noticia/2025/09/12/cantores-ph-e-michel-se-passam-por-desconhecidos-e-surpreendem-em-ponto-de-onibus-em-goiania-video.ghtml" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-2xl bg-zinc-900/90 hover:bg-zinc-800 border border-amber-500/30 transition">
+                                <div class="flex items-center gap-2.5 min-w-0">
+                                    <div class="w-9 h-9 rounded-xl bg-red-500/20 border border-red-500/40 flex items-center justify-center text-red-400 font-bold text-[10px] shrink-0">G1</div>
+                                    <div class="min-w-0">
+                                        <p class="text-xs sm:text-sm font-bold text-white truncate">Matéria Especial G1</p>
+                                        <p class="text-[10px] text-zinc-400 truncate">+18M views</p>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-red-500/15 text-red-300 font-medium shrink-0">Imprensa</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-3xl p-4 sm:p-6 space-y-3">
+                        <h3 class="text-base sm:text-lg font-bold text-white">Central do Contratante</h3>
+                        <p class="text-[11px] text-zinc-400">Dados oficiais para produção, imprensa e contratos.</p>
+
+                        <div class="space-y-2 text-[11px] sm:text-xs">
+                            <div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-900 border border-zinc-800 gap-2">
+                                <span class="text-zinc-400 shrink-0">WhatsApp:</span>
+                                <a href="https://wa.me/5562982155840" target="_blank" rel="noopener noreferrer" class="font-bold text-amber-400 hover:underline text-right break-all">(62) 9 8215-5840</a>
+                            </div>
+                            <div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-900 border border-zinc-800 gap-2">
+                                <span class="text-zinc-400 shrink-0">E-mail:</span>
+                                <span class="font-semibold text-white text-right break-all">phemichelphm@gmail.com</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2.5 rounded-xl bg-zinc-900 border border-zinc-800 gap-2">
+                                <span class="text-zinc-400 shrink-0">Instagram:</span>
+                                <div class="flex gap-1.5 flex-wrap justify-end">
+                                    <a href="https://www.instagram.com/phemichel" target="_blank" rel="noopener noreferrer" class="text-amber-400 hover:underline font-semibold">@phemichel</a>
+                                    <span class="text-zinc-600">•</span>
+                                    <a href="https://www.instagram.com/ph_phem" target="_blank" rel="noopener noreferrer" class="text-amber-400 hover:underline font-semibold">@ph_phem</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2 pt-1">
+                            <button id="btn-modal-rider" class="touch-lg p-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-[11px] font-semibold text-white transition">Rider Técnico</button>
+                            <button id="btn-modal-camarim" class="touch-lg p-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-[11px] font-semibold text-white transition">Camarim & Hotel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: ESTÚDIO -->
+        <section id="tab-conteudo" class="hidden space-y-6 sm:space-y-8">
+            <div class="glass-card rounded-3xl p-4 sm:p-8 border border-amber-500/30">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                    <div class="min-w-0">
+                        <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-amber-400">QG Criativo do PH</span>
+                        <h2 class="text-xl sm:text-3xl font-black text-white mt-1">Gerador de Roteiros Virais</h2>
+                        <p class="text-[11px] sm:text-sm text-zinc-400 mt-1">Roteiros prontos para gravar em Goiânia, pontos de ônibus e bastidores.</p>
+                    </div>
+                    <button id="btn-open-teleprompter" class="touch-lg gold-gradient-bg text-black font-bold text-[11px] sm:text-sm px-3.5 py-2.5 rounded-xl shadow-lg shadow-amber-500/20 hover:brightness-110 transition">
+                        Teleprompter
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 mt-5">
+                    <div class="lg:col-span-5 space-y-3 bg-zinc-950/80 p-4 rounded-2xl border border-zinc-800">
+                        <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider">1. Configurar</h3>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-zinc-300 mb-1" for="sc-formato">Formato</label>
+                            <select id="sc-formato" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                                <option value="ponto">Pegadinha no Ponto de Ônibus</option>
+                                <option value="desafio">Desafio Valendo PIX</option>
+                                <option value="carro">Voz e Violão no Carro</option>
+                                <option value="historia">Storytelling / Bastidores</option>
+                                <option value="contratante">Comercial para Contratantes</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-zinc-300 mb-1" for="sc-musica">Música Foco</label>
+                            <select id="sc-musica" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                                <option>Só Falta Nóis Namorar</option>
+                                <option>Dona Onça</option>
+                                <option>Arranhado Novo</option>
+                                <option>Cambaleando</option>
+                                <option>Clássico Sertanejo</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-zinc-300 mb-1" for="sc-local">Local</label>
+                            <input id="sc-local" type="text" value="Ponto de ônibus no Setor Jardim América - Goiânia" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-zinc-300 mb-1" for="sc-gancho">Gancho (3s)</label>
+                            <select id="sc-gancho" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                                <option>Humor / Situação Inusitada</option>
+                                <option>Choque Vocal</option>
+                                <option>Curiosidade Financeira</option>
+                                <option>Arrepio / Nostalgia</option>
+                            </select>
+                        </div>
+                        <button id="btn-gerar-roteiro" class="touch-lg w-full gold-gradient-bg text-black font-bold text-sm py-2.5 px-4 rounded-xl shadow-lg shadow-amber-500/20 hover:brightness-110 active:scale-[0.98] transition">
+                            Gerar Roteiro
+                        </button>
+                    </div>
+
+                    <div class="lg:col-span-7 bg-zinc-950/90 p-4 sm:p-6 rounded-2xl border border-zinc-800 flex flex-col justify-between space-y-3">
+                        <div>
+                            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-zinc-800">
+                                <h3 id="sc-output-title" class="text-sm sm:text-base font-bold text-white">Roteiro Estruturado</h3>
+                                <span id="sc-output-tag" class="text-[10px] px-2 py-1 rounded-full bg-amber-500/15 text-amber-300 font-semibold">Reels / TikTok</span>
+                            </div>
+                            <div id="sc-output-body" class="mt-3 space-y-2.5 text-xs sm:text-sm text-zinc-200 leading-relaxed"></div>
+                        </div>
+                        <div class="pt-3 border-t border-zinc-800 flex flex-wrap gap-2">
+                            <button id="btn-save-roteiro-kanban" class="touch-lg gold-gradient-bg text-black font-bold text-[11px] sm:text-sm px-3.5 py-2.5 rounded-xl hover:brightness-110 active:scale-[0.98] transition">
+                                + Salvar na Fila
+                            </button>
+                            <button id="btn-copy-roteiro" class="touch-lg bg-zinc-900 hover:bg-zinc-800 text-white font-semibold text-[11px] sm:text-sm px-3.5 py-2.5 rounded-xl border border-zinc-700 active:scale-[0.98] transition">
+                                Copiar
+                            </button>
+                            <button id="btn-send-roteiro-wpp" class="touch-lg bg-zinc-900 hover:bg-zinc-800 text-emerald-400 font-semibold text-[11px] sm:text-sm px-3.5 py-2.5 rounded-xl border border-zinc-700 active:scale-[0.98] transition">
+                                WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-3xl p-4 sm:p-8">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-white">Fila de Gravações do PH</h3>
+                        <p class="text-[11px] sm:text-xs text-zinc-400">Clique no status para avançar.</p>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-full bg-zinc-900 border border-zinc-700 text-[11px] text-zinc-300">Total: <strong id="content-count" class="text-amber-400">0</strong></span>
+                </div>
+                <div id="content-board-list" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+            </div>
+        </section>
+
+        <!-- TAB 3: LOGÍSTICA -->
+        <section id="tab-logistica" class="hidden space-y-6 sm:space-y-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+                <div class="lg:col-span-7 space-y-4 sm:space-y-6">
+                    <div class="glass-card rounded-3xl p-4 sm:p-8 border border-amber-500/30">
+                        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-zinc-800">
+                            <div>
+                                <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-amber-400">Central de Estrada</span>
+                                <h2 class="text-lg sm:text-2xl font-bold text-white mt-0.5">Agenda & Day Sheet</h2>
+                            </div>
+                            <button id="btn-toggle-new-show" class="gold-gradient-bg text-black font-bold text-[11px] px-3 py-2 rounded-xl hover:brightness-110 transition">+ Novo Show</button>
+                        </div>
+
+                        <div id="new-show-form" class="hidden mt-3 p-3 rounded-2xl bg-zinc-950 border border-amber-500/40 space-y-2.5">
+                            <h4 class="text-[11px] font-bold uppercase text-amber-400">Cadastrar Show</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <input id="ns-cidade" type="text" placeholder="Cidade - UF" class="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2 text-sm text-white">
+                                <input id="ns-evento" type="text" placeholder="Evento / Contratante" class="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2 text-sm text-white">
+                                <input id="ns-data" type="date" value="2026-11-14" class="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2 text-sm text-white">
+                                <input id="ns-horario" type="time" value="23:30" class="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2 text-sm text-white">
+                                <input id="ns-cache" type="number" placeholder="Cachê R$" value="22000" class="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2 text-sm text-white">
+                                <select id="ns-status" class="bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2 text-sm text-white">
+                                    <option>Confirmado</option>
+                                    <option>Reservado</option>
+                                </select>
+                            </div>
+                            <div class="flex justify-end">
+                                <button id="btn-save-new-show" class="bg-amber-500 text-black font-bold text-xs px-4 py-2 rounded-lg">Salvar</button>
+                            </div>
+                        </div>
+
+                        <div id="shows-list" class="mt-4 space-y-2.5"></div>
+                    </div>
+
+                    <div class="glass-card rounded-3xl p-4 sm:p-8">
+                        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-zinc-800">
+                            <div>
+                                <h3 class="text-base sm:text-lg font-bold text-white">Ordem do Dia (Day Sheet)</h3>
+                                <p class="text-[11px] sm:text-xs text-zinc-400">Selecione um show e ajuste os horários.</p>
+                            </div>
+                            <span id="ds-selected-badge" class="text-[10px] px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-300 font-semibold">—</span>
+                        </div>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mt-3">
+                            <div><label class="block text-[10px] text-zinc-400 mb-1">Saída Van</label><input id="ds-saida" type="time" value="14:00" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-2.5 py-2 text-sm text-white"></div>
+                            <div><label class="block text-[10px] text-zinc-400 mb-1">Check-in Hotel</label><input id="ds-hotel" type="time" value="17:30" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-2.5 py-2 text-sm text-white"></div>
+                            <div><label class="block text-[10px] text-zinc-400 mb-1">Passagem Som</label><input id="ds-passagem" type="time" value="19:30" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-2.5 py-2 text-sm text-white"></div>
+                            <div><label class="block text-[10px] text-zinc-400 mb-1">Camarim</label><input id="ds-camarim" type="time" value="22:30" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-2.5 py-2 text-sm text-white"></div>
+                            <div><label class="block text-[10px] text-zinc-400 mb-1">Palco</label><input id="ds-palco" type="time" value="23:30" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-2.5 py-2 text-sm text-white"></div>
+                            <div><label class="block text-[10px] text-zinc-400 mb-1">Retorno</label><input id="ds-retorno" type="time" value="03:00" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-2.5 py-2 text-sm text-white"></div>
+                        </div>
+
+                        <textarea id="ds-output" rows="7" readonly class="w-full mt-3 bg-zinc-950 border border-zinc-800 rounded-xl p-3 text-[11px] text-zinc-300 font-mono resize-none"></textarea>
+
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <button id="btn-copy-daysheet" class="touch-lg gold-gradient-bg text-black font-bold text-[11px] sm:text-sm px-3.5 py-2.5 rounded-xl hover:brightness-110 active:scale-[0.98] transition">Copiar</button>
+                            <button id="btn-wpp-daysheet" class="touch-lg bg-zinc-900 hover:bg-zinc-800 text-emerald-400 font-semibold text-[11px] sm:text-sm px-3.5 py-2.5 rounded-xl border border-zinc-700 active:scale-[0.98] transition">WhatsApp</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 space-y-4 sm:space-y-6">
+                    <div class="glass-card rounded-3xl p-4 sm:p-6 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-base sm:text-lg font-bold text-white">Checklist de Estrada</h3>
+                                <p class="text-[11px] text-zinc-400">Antes da van sair</p>
+                            </div>
+                            <button id="btn-reset-checklist" class="text-[11px] text-amber-400 hover:underline">Reset</button>
+                        </div>
+                        <div id="road-checklist" class="space-y-1.5"></div>
+                        <div class="pt-2 border-t border-zinc-800 flex items-center justify-between text-[11px] text-zinc-400">
+                            <span>Progresso:</span>
+                            <strong id="checklist-progress" class="text-amber-400">0/8</strong>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-3xl p-4 sm:p-6 space-y-3">
+                        <h3 class="text-base sm:text-lg font-bold text-white">Fechamento do Show</h3>
+                        <p class="text-[11px] text-zinc-400">Simule a divisão líquida.</p>
+
+                        <div class="space-y-2.5 text-[11px]">
+                            <div class="grid grid-cols-2 gap-2">
+                                <div><label class="block text-zinc-400 mb-1">Cachê Bruto</label><input id="fin-bruto" type="number" step="500" value="22000" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-2.5 py-2 text-sm text-white font-bold"></div>
+                                <div><label class="block text-zinc-400 mb-1">Banda + Técnica</label><input id="fin-banda" type="number" step="200" value="5400" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-2.5 py-2 text-sm text-white"></div>
+                                <div><label class="block text-zinc-400 mb-1">Van / Logística</label><input id="fin-logistica" type="number" step="100" value="2800" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-2.5 py-2 text-sm text-white"></div>
+                                <div><label class="block text-zinc-400 mb-1">Comissão (%)</label><input id="fin-comissao" type="number" step="1" value="15" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-2.5 py-2 text-sm text-white"></div>
+                            </div>
+
+                            <div class="p-3 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-1.5 mt-2">
+                                <div class="flex justify-between text-zinc-400"><span>Despesas + Comissão:</span><strong id="fin-despesas-out" class="text-red-400">—</strong></div>
+                                <div class="flex justify-between text-sm pt-1.5 border-t border-zinc-800"><span class="text-zinc-200 font-semibold">Líquido Dupla:</span><strong id="fin-liquido-out" class="text-emerald-400 text-base">—</strong></div>
+                                <div class="flex justify-between text-[10px] text-zinc-400"><span>Fundo Conteúdo (20%):</span><span id="fin-caixa-out" class="text-amber-400 font-semibold">—</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: SETLIST -->
+        <section id="tab-repertorio" class="hidden space-y-6 sm:space-y-8">
+            <div class="glass-card rounded-3xl p-4 sm:p-8 border border-amber-500/30">
+                <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-zinc-800">
+                    <div>
+                        <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-amber-400">Direção Musical</span>
+                        <h2 class="text-xl sm:text-3xl font-black text-white mt-0.5">Montador de Setlist</h2>
+                        <p class="text-[11px] sm:text-sm text-zinc-400 mt-1">Filtre por momento, confira tons e use o Modo Palco.</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button id="btn-stage-mode" class="touch-lg gold-gradient-bg text-black font-bold text-[11px] sm:text-sm px-3.5 py-2.5 rounded-xl shadow-lg shadow-amber-500/20 hover:brightness-110 transition">Modo Palco</button>
+                        <button id="btn-copy-setlist" class="touch-lg bg-zinc-900 hover:bg-zinc-800 text-white font-semibold text-[11px] sm:text-sm px-3.5 py-2.5 rounded-xl border border-zinc-700 transition">Copiar</button>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-between gap-2 my-4">
+                    <div class="flex flex-wrap gap-1.5">
+                        <button data-setfilter="all" class="set-filter-btn px-2.5 py-1.5 rounded-xl text-[11px] font-semibold bg-amber-500 text-black">Todas</button>
+                        <button data-setfilter="autoral" class="set-filter-btn px-2.5 py-1.5 rounded-xl text-[11px] font-semibold bg-zinc-900 text-zinc-300 border border-zinc-800">Autorais</button>
+                        <button data-setfilter="agitado" class="set-filter-btn px-2.5 py-1.5 rounded-xl text-[11px] font-semibold bg-zinc-900 text-zinc-300 border border-zinc-800">Abertura</button>
+                        <button data-setfilter="modao" class="set-filter-btn px-2.5 py-1.5 rounded-xl text-[11px] font-semibold bg-zinc-900 text-zinc-300 border border-zinc-800">Modão</button>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2 mb-4 p-2.5 rounded-2xl bg-zinc-950 border border-zinc-800">
+                    <input id="new-song-title" type="text" placeholder="Nova música..." class="flex-1 min-w-[120px] bg-zinc-900 border border-zinc-700 rounded-xl px-3 py-2 text-sm text-white">
+                    <input id="new-song-key" type="text" placeholder="Tom" class="w-16 bg-zinc-900 border border-zinc-700 rounded-xl px-2 py-2 text-sm text-white">
+                    <button id="btn-add-song" class="bg-zinc-800 hover:bg-zinc-700 text-amber-400 font-bold text-xs px-3 py-2 rounded-xl border border-zinc-700">+</button>
+                </div>
+
+                <div id="setlist-container" class="grid grid-cols-1 md:grid-cols-2 gap-2.5"></div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <p>© 2026 PH & Michel. Todos os direitos reservados. Goiânia - GO.</p>
+    <!-- MODAL: Teleprompter -->
+    <div id="modal-teleprompter" class="hidden fixed inset-0 z-50 bg-black/95 flex flex-col modal-shell p-4 sm:p-10">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-3 gap-2">
+            <div class="min-w-0">
+                <span class="text-[10px] font-bold uppercase text-amber-400">Teleprompter</span>
+                <h3 class="text-sm sm:text-lg font-bold text-white truncate">Leitura para Câmera</h3>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+                <button id="btn-tp-scroll" class="px-3 py-2 rounded-xl bg-amber-500 text-black font-bold text-[11px]">▶ Rolagem</button>
+                <button id="btn-close-teleprompter" class="px-3 py-2 rounded-xl bg-zinc-800 text-white font-semibold text-[11px]">✕</button>
+            </div>
+        </div>
+        <div id="tp-scroll-box" class="flex-1 overflow-y-auto my-4 max-w-3xl mx-auto w-full text-center py-10">
+            <p id="tp-text-content" class="text-xl sm:text-4xl font-extrabold text-white leading-relaxed whitespace-pre-line"></p>
+        </div>
+        <div class="text-center text-[10px] text-zinc-500">Celular na vertical, olhos próximos à lente superior.</div>
+    </div>
+
+    <!-- MODAL: Modo Palco -->
+    <div id="modal-stage" class="hidden fixed inset-0 z-50 bg-black flex flex-col modal-shell p-4 sm:p-10">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
+            <div class="flex items-center gap-2 min-w-0">
+                <span class="px-2.5 py-1 rounded-full bg-amber-500 text-black font-black text-[10px] uppercase shrink-0">Palco</span>
+                <span class="text-xs text-zinc-400 truncate">PH e Michel • Ao Vivo</span>
+            </div>
+            <button id="btn-close-stage" class="px-3 py-2 rounded-xl bg-zinc-800 text-white font-bold text-[11px]">Sair</button>
+        </div>
+        <div id="stage-songs-list" class="flex-1 overflow-y-auto py-4 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-5xl mx-auto w-full"></div>
+    </div>
+
+    <!-- MODAL: Info -->
+    <div id="modal-info" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3">
+        <div class="glass-card max-w-lg w-full rounded-3xl p-5 sm:p-8 border border-amber-500/30 space-y-3 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-zinc-800 pb-3 sticky top-0 bg-[#121216]/95 -mx-1 px-1">
+                <h3 id="modal-info-title" class="text-base sm:text-lg font-bold text-white">Info</h3>
+                <button id="btn-close-info" class="text-zinc-400 hover:text-white text-sm font-bold p-1">✕</button>
+            </div>
+            <div id="modal-info-body" class="text-xs sm:text-sm text-zinc-300 space-y-3 leading-relaxed"></div>
+            <div class="pt-3 border-t border-zinc-800 flex justify-end">
+                <button id="btn-copy-info-modal" class="gold-gradient-bg text-black font-bold text-xs px-4 py-2.5 rounded-xl">Copiar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-900 py-5 mt-8 text-center text-[10px] sm:text-xs text-zinc-500">
+        <div class="max-w-7xl mx-auto px-3 flex flex-col sm:flex-row items-center justify-between gap-1.5">
+            <p>Desenvolvido para <strong class="text-zinc-400">PH e Michel</strong></p>
+            <p>Goiânia - GO • (62) 9 8215-5840 • phemichelphm@gmail.com</p>
+        </div>
     </footer>
 
+    <!-- App Logic -->
+    <script>
+        'use strict';
+
+        // ===== Helpers =====
+        function showToast(msg) {
+            const c = document.getElementById('toast-container');
+            const t = document.createElement('div');
+            t.className = 'bg-amber-500 text-black font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-xl border border-amber-300 transition-all duration-300 max-w-[280px]';
+            t.textContent = msg;
+            c.appendChild(t);
+            setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(20px)'; setTimeout(() => t.remove(), 300); }, 3000);
+        }
+
+        function copyTextToClipboard(text, successMsg) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text)
+                    .then(() => showToast(successMsg || 'Copiado!'))
+                    .catch(() => fallbackCopy(text, successMsg));
+            } else fallbackCopy(text, successMsg);
+        }
+        function fallbackCopy(text, successMsg) {
+            const ta = document.createElement('textarea');
+            ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); showToast(successMsg || 'Copiado!'); }
+            catch (e) { showToast('Não foi possível copiar.'); }
+            document.body.removeChild(ta);
+        }
+        function formatBRL(v) {
+            return Number(v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        // ===== State =====
+        const state = {
+            activeTab: 'vitrine',
+            quoteMode: 'contratante',
+            selectedShowIndex: 0,
+            setlistFilter: 'all',
+            tpInterval: null,
+            contentQueue: [
+                { id: 1, titulo: 'Pegadinha Ponto de Ônibus - Jardim América', musica: 'Só Falta Nóis Namorar', formato: 'Ponto de Ônibus Viral', status: 'Gravado / Editando', detalhe: 'PH chega fingindo que terminou namoro, puxa o violão e Michel entra na 2ª voz.' },
+                { id: 2, titulo: 'Desafio R$ 100 por Palavra Cantada', musica: 'Só Falta Nóis Namorar', formato: 'Desafio de Rua', status: 'Postado', detalhe: 'Premiação na hora para quem lembra o refrão.' },
+                { id: 3, titulo: 'Quem manda em casa? (Casais)', musica: 'Dona Onça', formato: 'Reels Humor', status: 'Ideia / Roteiro Pronto', detalhe: 'PH pergunta pros maridos no barzinho quem tem uma "Dona Onça" em casa.' },
+                { id: 4, titulo: 'Esquenta no Carro a Caminho do Show', musica: 'Arranhado Novo', formato: 'Bastidores', status: 'Ideia / Roteiro Pronto', detalhe: 'Segunda voz alta no banco antes da BR.' }
+            ],
+            shows: [
+                { id: 101, cidade: 'Goiânia - GO', evento: 'Gravação Especial No Ponto com PHeM', data: '2026-11-07', horario: '23:00', cache: 20000, status: 'Confirmado' },
+                { id: 102, cidade: 'Brasília - DF', evento: 'Casamento Premium - Lago Sul', data: '2026-11-21', horario: '23:30', cache: 24500, status: 'Confirmado' },
+                { id: 103, cidade: 'Rondonópolis - MT', evento: 'Sunset Sertanejo', data: '2026-12-05', horario: '22:00', cache: 28000, status: 'Reservado' }
+            ],
+            checklist: [
+                { id: 1, text: 'Violões, cabos reserva e afinadores', done: true },
+                { id: 2, text: 'Microfones sem fio e pilhas novas', done: true },
+                { id: 3, text: 'Figurinos da dupla passados na van', done: false },
+                { id: 4, text: 'Kit gravação PH (lapela, tripé, bateria)', done: false },
+                { id: 5, text: 'Contrato + comprovante dos 50%', done: true },
+                { id: 6, text: 'Rooming list enviada ao hotel', done: false },
+                { id: 7, text: 'Pen drive com VS e artes do telão', done: false },
+                { id: 8, text: 'Abastecimento da van conferido', done: false }
+            ],
+            setlist: [
+                { id: 1, title: 'Só Falta Nóis Namorar (No Ponto)', key: 'G', bpm: '132 BPM', cat: 'autoral', note: 'Puxar coro com público' },
+                { id: 2, title: 'Dona Onça (No Ponto)', key: 'A', bpm: '136 BPM', cat: 'autoral', note: 'Brincar com casais' },
+                { id: 3, title: 'Arranhado Novo', key: 'E', bpm: '118 BPM', cat: 'autoral', note: 'Modão rasgado' },
+                { id: 4, title: 'Cambaleando', key: 'D', bpm: '124 BPM', cat: 'autoral', note: 'Momento tomar todas' },
+                { id: 5, title: 'Esquenta Pro Rolê', key: 'Bm', bpm: '130 BPM', cat: 'agitado', note: 'Abertura explosiva' },
+                { id: 6, title: 'Paradeiro', key: 'F#m', bpm: '134 BPM', cat: 'agitado', note: 'Hino de sexta' },
+                { id: 7, title: 'Só Dá Você / Dormi na Praça (Medley)', key: 'C', bpm: '96 BPM', cat: 'modao', note: 'Bloco viral G1' },
+                { id: 8, title: 'Se Eu Chorar / Quando Você Some', key: 'G', bpm: '110 BPM', cat: 'modao', note: 'Acústico no banquinho' },
+                { id: 9, title: 'Pra Mudar Minha Vida / Separação', key: 'E', bpm: '105 BPM', cat: 'modao', note: 'Coro de buteco' },
+                { id: 10, title: 'Eu Me Acostumei', key: 'A', bpm: '115 BPM', cat: 'autoral', note: 'Romântica marcante' }
+            ]
+        };
+
+        // ===== Navigation =====
+        function switchTab(id) {
+            state.activeTab = id;
+            ['vitrine', 'conteudo', 'logistica', 'repertorio'].forEach(t => {
+                const sec = document.getElementById('tab-' + t);
+                const btn = document.getElementById('nav-' + t);
+                if (t === id) { sec.classList.remove('hidden'); btn.classList.add('active'); }
+                else { sec.classList.add('hidden'); btn.classList.remove('active'); }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', () => switchTab(b.getAttribute('data-tab'))));
+        document.getElementById('btn-scroll-orcamento').addEventListener('click', () => document.getElementById('secao-orcamento').scrollIntoView({ behavior: 'smooth' }));
+        document.getElementById('btn-go-ph-studio').addEventListener('click', () => switchTab('conteudo'));
+
+        // ===== QUOTE =====
+        function updateQuoteCalculation() {
+            const nome = document.getElementById('q-nome').value || 'Contratante';
+            const dataRaw = document.getElementById('q-data').value;
+            const dataFmt = dataRaw ? dataRaw.split('-').reverse().join('/') : 'A definir';
+            const cidade = document.getElementById('q-cidade').value || 'Goiânia - GO';
+            const dist = Math.max(0, parseFloat(document.getElementById('q-distancia').value) || 0);
+            const tipo = document.getElementById('q-tipo').value;
+            const formato = document.getElementById('q-formato').value;
+            const publico = document.getElementById('q-publico').value;
+            const som = document.getElementById('q-som').value;
+
+            const baseCache = parseFloat(document.getElementById('q-cache-custom').value) || 18000;
+            const kmRate = parseFloat(document.getElementById('q-km-rate').value) || 5.5;
+            const diariaRate = parseFloat(document.getElementById('q-diaria-rate').value) || 120;
+
+            let mult = 1, equipe = 12, quartos = 6, label = 'Banda Completa (Palco Principal)';
+            if (formato === 'resenha') { mult = 0.78; equipe = 7; quartos = 4; label = 'Formato No Ponto / Resenha'; }
+            else if (formato === 'acustico') { mult = 0.62; equipe = 5; quartos = 3; label = 'Pocket Show Acústico VIP'; }
+
+            const cache = Math.round((baseCache * mult) / 100) * 100;
+            const transporte = Math.round(dist * 2 * kmRate);
+            const precisaHotel = dist > 80;
+            const hotel = precisaHotel ? (quartos * 260) : 0;
+            const alimentacao = equipe * diariaRate;
+            const custoSom = som === 'incluso' ? 4500 : 0;
+
+            const diarias = hotel + alimentacao;
+            const total = cache + transporte + diarias + custoSom;
+            const sinal = total / 2;
+
+            document.getElementById('q-total-display').textContent = formatBRL(total);
+            document.getElementById('q-equipe-badge').textContent = `Equipe: ${equipe}`;
+            document.getElementById('q-hotel-badge').textContent = precisaHotel ? `${quartos} quartos (1 diária)` : 'Sem pernoite';
+            document.getElementById('q-val-cache').textContent = formatBRL(cache + custoSom);
+            document.getElementById('q-val-transporte').textContent = formatBRL(transporte);
+            document.getElementById('q-val-diarias').textContent = formatBRL(diarias);
+            document.getElementById('q-val-sinal').textContent = formatBRL(sinal);
+
+            const txt =
+`🎤 *PROPOSTA DE SHOW - PH E MICHEL*
+• Contratante: ${nome}
+• Data: ${dataFmt} | Local: ${cidade} (${dist} km)
+• Evento: ${tipo} (${publico})
+• Formato: ${label} (${equipe} pessoas)
+• Som: ${som === 'incluso' ? 'Pacote incluso' : 'Por conta do contratante'}
+
+💰 *INVESTIMENTO:*
+• Cachê${som === 'incluso' ? ' + Som' : ''}: ${formatBRL(cache + custoSom)}
+• Transporte (Ida/Volta): ${formatBRL(transporte)}
+• Diárias + Hotel: ${formatBRL(diarias)}
+👉 *TOTAL:* *${formatBRL(total)}*
+✅ Reserva: 50% na assinatura (${formatBRL(sinal)}) + 50% até 48h antes.`;
+
+            document.getElementById('q-preview-text').value = txt;
+            return { nome, dataRaw, cidade, total };
+        }
+
+        ['q-nome','q-data','q-cidade','q-distancia','q-tipo','q-formato','q-publico','q-som','q-cache-custom','q-km-rate','q-diaria-rate'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) { el.addEventListener('input', updateQuoteCalculation); el.addEventListener('change', updateQuoteCalculation); }
+        });
+
+        document.getElementById('mode-contratante').addEventListener('click', () => {
+            state.quoteMode = 'contratante';
+            document.getElementById('socio-controls').classList.add('hidden');
+            document.getElementById('mode-contratante').className = 'px-2.5 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-amber-500 text-black transition';
+            document.getElementById('mode-socio').className = 'px-2.5 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold text-zinc-400 hover:text-white transition';
+            document.getElementById('quote-mode-desc').textContent = 'Preencha os dados para gerar a estimativa logística e enviar o pedido estruturado para o escritório.';
+        });
+        document.getElementById('mode-socio').addEventListener('click', () => {
+            state.quoteMode = 'socio';
+            document.getElementById('socio-controls').classList.remove('hidden');
+            document.getElementById('mode-socio').className = 'px-2.5 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold bg-amber-500 text-black transition';
+            document.getElementById('mode-contratante').className = 'px-2.5 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold text-zinc-400 hover:text-white transition';
+            document.getElementById('quote-mode-desc').textContent = 'Modo Sócio: ajuste cachê, KM e diárias para calibrar a proposta.';
+        });
+
+        document.getElementById('btn-copy-quote').addEventListener('click', () => copyTextToClipboard(document.getElementById('q-preview-text').value, 'Proposta copiada!'));
+        document.getElementById('btn-whatsapp-quote').addEventListener('click', () => {
+            const url = 'https://wa.me/5562982155840?text=' + encodeURIComponent(document.getElementById('q-preview-text').value);
+            window.open(url, '_blank', 'noopener,noreferrer');
+        });
+        document.getElementById('btn-save-lead-agenda').addEventListener('click', () => {
+            const info = updateQuoteCalculation();
+            state.shows.unshift({ id: Date.now(), cidade: info.cidade, evento: info.nome, data: info.dataRaw || '2026-12-12', horario: '23:00', cache: info.total, status: 'Reservado' });
+            state.selectedShowIndex = 0;
+            renderShowsList();
+            showToast('Lead lançado na agenda!');
+        });
+
+        // ===== CONTENT =====
+        function generatePHScript() {
+            const formato = document.getElementById('sc-formato').value;
+            const musica = document.getElementById('sc-musica').value;
+            const local = document.getElementById('sc-local').value || 'Goiânia - GO';
+            let titulo = '', tag = '', html = '', tp = '';
+
+            if (formato === 'ponto') {
+                titulo = `Pegadinha no Ponto: "${musica}"`; tag = 'Quadro Viral (+18M)';
+                html = `
+                    <div class="p-2.5 sm:p-3.5 rounded-xl bg-zinc-900 border border-zinc-800"><span class="text-amber-400 font-bold text-[10px] uppercase block mb-1">Cena 1 • Gancho 3s (${local})</span><p class="text-xs">PH chega no ponto com violão, senta ao lado e puxa papo: <em>"Dia puxado... a mulher me colocou pra correr de casa, mas música salva. Vocês importam se eu tocar uma moda?"</em></p></div>
+                    <div class="p-2.5 sm:p-3.5 rounded-xl bg-zinc-900 border border-zinc-800"><span class="text-amber-400 font-bold text-[10px] uppercase block mb-1">Cena 2 • Surpresa</span><p class="text-xs">PH começa <strong>"${musica}"</strong> perto do mic escondido. Michel (fingindo ser passageiro) entra na 2ª voz de surpresa.</p></div>
+                    <div class="p-2.5 sm:p-3.5 rounded-xl bg-zinc-900 border border-zinc-800"><span class="text-amber-400 font-bold text-[10px] uppercase block mb-1">Cena 3 • Fechamento</span><p class="text-xs">Foca no choque dos passageiros. PH: <em>"Rapaz, já dá pra formar dupla!"</em> Revelação + CTA @phemichel.</p></div>
+                    <div class="p-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-[11px] text-amber-200"><strong>Legenda:</strong> Esperando o ônibus e do nada acontece isso 😂🎶 #phemichel #sertanejo</div>
+                `;
+                tp = `Dia puxado hoje...\n\nCada um tem seus B.O., mas hoje a dona onça ficou brava!\n\nPosso puxar uma moda enquanto o ônibus não vem?\n\n[CANTAR REFRÃO: ${musica}]\n\nVocê canta demais! Já dá pra formar dupla!\n\nSegue @phemichel!`;
+            } else if (formato === 'desafio') {
+                titulo = `Desafio Valendo PIX: "${musica}"`; tag = 'Alto Engajamento';
+                html = `
+                    <div class="p-2.5 sm:p-3.5 rounded-xl bg-zinc-900 border border-zinc-800"><span class="text-amber-400 font-bold text-[10px] uppercase block mb-1">Cena 1 • Abordagem</span><p class="text-xs">PH com notas: <em>"Tô aqui em ${local}. Cada palavra do refrão de <strong>${musica}</strong> que acertar vale R$ 50!"</em></p></div>
+                    <div class="p-2.5 sm:p-3.5 rounded-xl bg-zinc-900 border border-zinc-800"><span class="text-amber-400 font-bold text-[10px] uppercase block mb-1">Cena 2 • Execução</span><p class="text-xs">Cantam o refrão articulado. Participante tenta repetir.</p></div>
+                    <div class="p-2.5 sm:p-3.5 rounded-xl bg-zinc-900 border border-zinc-800"><span class="text-amber-400 font-bold text-[10px] uppercase block mb-1">Cena 3 • Premiação</span><p class="text-xs">Entrega na mão: <em>"Já decorou? Comenta aqui!"</em></p></div>
+                `;
+                tp = `Tô aqui em ${local} com dinheiro na mão!\n\nBora um desafio? Cada palavra do refrão vale cinquentão!\n\nSomos PH e Michel e a música é "${musica}".\n\n[CANTAR REFRÃO]\n\nMandou bem! Segue @phemichel!`;
+            } else if (formato === 'carro') {
+                titulo = `Esquenta no Carro: "${musica}"`; tag = 'Reels de Voz';
+                html = `
+                    <div class="p-2.5 sm:p-3.5 rounded-xl bg-zinc-900 border border-zinc-800"><span class="text-amber-400 font-bold text-[10px] uppercase block mb-1">Cena 1 • Câmera no Painel</span><p class="text-xs">PH no volante, Michel ao lado. Texto: <em>"Quando a 2ª voz vem forte até no carro 🔥"</em></p></div>
+                    <div class="p-2.5 sm:p-3.5 rounded-xl bg-zinc-900 border border-zinc-800"><span class="text-amber-400 font-bold text-[10px] uppercase block mb-1">Cena 2 • Refrão Rasgado</span><p class="text-xs">Sem intro longa: já rasga <strong>"${musica}"</strong> a capela.</p></div>
+                `;
+                tp = `Saindo de ${local}!\n\nBora aquecer a voz no carro!\n\n[CANTAR REFRÃO: ${musica}]\n\nQual cidade quer ver PH e Michel? Comenta!`;
+            } else if (formato === 'historia') {
+                titulo = `Bastidores do PH`; tag = 'Conexão @ph_phem';
+                html = `
+                    <div class="p-2.5 sm:p-3.5 rounded-xl bg-zinc-900 border border-zinc-800"><span class="text-amber-400 font-bold text-[10px] uppercase block mb-1">Cena 1 • Rotina</span><p class="text-xs">PH organizando logística, conferindo som, subindo no palco ao som de <strong>"${musica}"</strong>.</p></div>
+                    <div class="p-2.5 sm:p-3.5 rounded-xl bg-zinc-900 border border-zinc-800"><span class="text-amber-400 font-bold text-[10px] uppercase block mb-1">Cena 2 • Narração</span><p class="text-xs"><em>"Muita gente vê os 90 min de show, mas não imagina a correria..."</em></p></div>
+                `;
+                tp = `Muita gente vê os 90 min de palco cantando "${musica}", mas não faz ideia dos bastidores!\n\nAqui a gente vive cada etapa: do planejamento ao vídeo no ponto de ônibus.\n\nObrigado a cada um de vocês!`;
+            } else {
+                titulo = `Comercial para Contratantes`; tag = 'Tráfego Pago';
+                html = `
+                    <div class="p-2.5 sm:p-3.5 rounded-xl bg-zinc-900 border border-zinc-800"><span class="text-amber-400 font-bold text-[10px] uppercase block mb-1">Cena 1 • Chamada</span><p class="text-xs">PH e Michel elegantes: <em>"Vai casar, formar ou evento corporativo inesquecível? Imagina levar PH e Michel!"</em></p></div>
+                    <div class="p-2.5 sm:p-3.5 rounded-xl bg-zinc-900 border border-zinc-800"><span class="text-amber-400 font-bold text-[10px] uppercase block mb-1">Cena 2 • Pista Cheia</span><p class="text-xs">Público cantando <strong>"${musica}"</strong>. CTA: simule no site ou WhatsApp (62) 98215-5840.</p></div>
+                `;
+                tp = `Quer PH e Michel no seu casamento, formatura ou evento corporativo?\n\nPreparamos um repertório que ninguém fica parado, do modão aos hits como "${musica}"!\n\nClique no link e simule seu orçamento!`;
+            }
+
+            document.getElementById('sc-output-title').textContent = titulo;
+            document.getElementById('sc-output-tag').textContent = tag;
+            document.getElementById('sc-output-body').innerHTML = html;
+            document.getElementById('tp-text-content').textContent = tp;
+        }
+
+        document.getElementById('btn-gerar-roteiro').addEventListener('click', () => { generatePHScript(); showToast('Roteiro gerado!'); });
+        document.getElementById('btn-copy-roteiro').addEventListener('click', () => {
+            const t = document.getElementById('sc-output-title').textContent;
+            copyTextToClipboard(`${t}\n\n${document.getElementById('sc-output-body').innerText}`, 'Roteiro copiado!');
+        });
+        document.getElementById('btn-send-roteiro-wpp').addEventListener('click', () => {
+            const t = document.getElementById('sc-output-title').textContent;
+            const b = document.getElementById('sc-output-body').innerText;
+            window.open('https://wa.me/?text=' + encodeURIComponent(`🎬 ROTEIRO: ${t}\n\n${b}`), '_blank', 'noopener,noreferrer');
+        });
+        document.getElementById('btn-save-roteiro-kanban').addEventListener('click', () => {
+            state.contentQueue.unshift({ id: Date.now(), titulo: document.getElementById('sc-output-title').textContent, musica: document.getElementById('sc-musica').value, formato: document.getElementById('sc-output-tag').textContent, status: 'Ideia / Roteiro Pronto', detalhe: `Local: ${document.getElementById('sc-local').value}` });
+            renderContentBoard();
+            showToast('Salvo na fila!');
+        });
+
+        function renderContentBoard() {
+            const c = document.getElementById('content-board-list');
+            document.getElementById('content-count').textContent = state.contentQueue.length;
+            c.innerHTML = '';
+            if (!state.contentQueue.length) { c.innerHTML = '<p class="text-xs text-zinc-500 col-span-full text-center py-4">Fila vazia.</p>'; return; }
+            state.contentQueue.forEach((item, idx) => {
+                let badge = 'bg-amber-500/15 text-amber-300 border-amber-500/30';
+                if (item.status === 'Gravado / Editando') badge = 'bg-blue-500/15 text-blue-300 border-blue-500/30';
+                if (item.status === 'Postado') badge = 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30';
+                const card = document.createElement('div');
+                card.className = 'p-3 rounded-2xl bg-zinc-900/90 border border-zinc-800';
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-2">
+                        <span class="text-[10px] font-semibold text-zinc-400">${item.formato} • 🎵 ${item.musica}</span>
+                        <button data-status-idx="${idx}" class="status-cycle-btn text-[10px] font-bold px-2 py-1 rounded-full border ${badge} whitespace-nowrap shrink-0">${item.status} ↻</button>
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-bold text-white mt-1.5">${item.titulo}</h4>
+                    <p class="text-[11px] text-zinc-400 mt-1">${item.detalhe}</p>
+                    <div class="flex justify-end mt-2"><button data-del-content="${idx}" class="text-[10px] text-zinc-500 hover:text-red-400">Remover</button></div>
+                `;
+                c.appendChild(card);
+            });
+            c.querySelectorAll('.status-cycle-btn').forEach(b => b.addEventListener('click', () => {
+                const i = parseInt(b.getAttribute('data-status-idx'), 10);
+                const o = ['Ideia / Roteiro Pronto', 'Gravado / Editando', 'Postado'];
+                state.contentQueue[i].status = o[(o.indexOf(state.contentQueue[i].status) + 1) % o.length];
+                renderContentBoard();
+            }));
+            c.querySelectorAll('[data-del-content]').forEach(b => b.addEventListener('click', () => {
+                state.contentQueue.splice(parseInt(b.getAttribute('data-del-content'), 10), 1);
+                renderContentBoard();
+            }));
+        }
+
+        // Teleprompter
+        document.getElementById('btn-open-teleprompter').addEventListener('click', () => document.getElementById('modal-teleprompter').classList.remove('hidden'));
+        document.getElementById('btn-close-teleprompter').addEventListener('click', () => {
+            if (state.tpInterval) { clearInterval(state.tpInterval); state.tpInterval = null; }
+            document.getElementById('btn-tp-scroll').textContent = '▶ Rolagem';
+            document.getElementById('modal-teleprompter').classList.add('hidden');
+        });
+        document.getElementById('btn-tp-scroll').addEventListener('click', () => {
+            const box = document.getElementById('tp-scroll-box'), btn = document.getElementById('btn-tp-scroll');
+            if (state.tpInterval) { clearInterval(state.tpInterval); state.tpInterval = null; btn.textContent = '▶ Rolagem'; }
+            else { btn.textContent = '⏸ Pausar'; state.tpInterval = setInterval(() => { box.scrollTop += 1.5; }, 40); }
+        });
+
+        // ===== LOGISTICS =====
+        function renderShowsList() {
+            const c = document.getElementById('shows-list');
+            c.innerHTML = '';
+            if (!state.shows.length) { c.innerHTML = '<p class="text-xs text-zinc-500 text-center py-4">Nenhum show na agenda.</p>'; return; }
+            state.shows.forEach((s, idx) => {
+                const d = s.data.split('-').reverse().join('/');
+                const isConf = s.status === 'Confirmado';
+                const badge = isConf ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30' : 'bg-amber-500/15 text-amber-300 border-amber-500/30';
+                const card = document.createElement('div');
+                card.className = `p-3 rounded-2xl border transition cursor-pointer ${idx === state.selectedShowIndex ? 'bg-amber-500/5 border-amber-500/50' : 'bg-zinc-900/90 border-zinc-800'}`;
+                card.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                            <div class="w-11 h-11 rounded-xl bg-zinc-950 border border-zinc-800 flex flex-col items-center justify-center shrink-0">
+                                <span class="text-[9px] text-amber-400 font-bold">${d.substring(0,5)}</span>
+                                <span class="text-[11px] font-black text-white">${s.horario}</span>
+                            </div>
+                            <div class="min-w-0">
+                                <p class="text-xs sm:text-sm font-bold text-white truncate">${s.evento}</p>
+                                <p class="text-[10px] sm:text-[11px] text-zinc-400 truncate">${s.cidade} • ${formatBRL(s.cache)}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <span class="text-[9px] sm:text-[10px] font-bold px-2 py-1 rounded-full border ${badge}">${s.status}</span>
+                            <button data-del-show="${idx}" class="text-zinc-500 hover:text-red-400 text-xs font-bold p-1">✕</button>
+                        </div>
+                    </div>
+                `;
+                card.addEventListener('click', (e) => {
+                    if (e.target.closest('[data-del-show]')) return;
+                    state.selectedShowIndex = idx; renderShowsList(); updateDaySheet();
+                });
+                c.appendChild(card);
+            });
+            c.querySelectorAll('[data-del-show]').forEach(b => b.addEventListener('click', (e) => {
+                e.stopPropagation();
+                state.shows.splice(parseInt(b.getAttribute('data-del-show'), 10), 1);
+                if (state.selectedShowIndex >= state.shows.length) state.selectedShowIndex = Math.max(0, state.shows.length - 1);
+                renderShowsList();
+            }));
+            updateDaySheet();
+        }
+
+        function updateDaySheet() {
+            const s = state.shows[state.selectedShowIndex];
+            if (!s) { document.getElementById('ds-output').value = 'Nenhum show selecionado.'; document.getElementById('ds-selected-badge').textContent = '—'; return; }
+            const d = s.data.split('-').reverse().join('/');
+            document.getElementById('ds-selected-badge').textContent = `${s.cidade} • ${d}`;
+            const g = id => document.getElementById(id).value || '--:--';
+            document.getElementById('ds-output').value =
+`📋 ORDEM DO DIA - PH E MICHEL
+📅 Data: ${d}
+📍 Local: ${s.cidade}
+🎤 Evento: ${s.evento}
+
+⏰ CRONOGRAMA:
+• ${g('ds-saida')} — Saída da Van (Goiânia)
+• ${g('ds-hotel')} — Check-in Hotel
+• ${g('ds-passagem')} — Passagem de Som
+• ${g('ds-camarim')} — Camarim / Fotos
+• ${g('ds-palco')} — 🎸 INÍCIO DO SHOW
+• ${g('ds-retorno')} — Retorno previsto
+
+🎸 OBSERVAÇÕES:
+• Conferir Rider e Camarim antes de sair
+• PH: câmeras + baterias
+• Michel: afinador e cabos
+• Confirmar 50% restante antes do show
+
+Vamos com fé! 🚀`;
+        }
+
+        ['ds-saida','ds-hotel','ds-passagem','ds-camarim','ds-palco','ds-retorno'].forEach(id => document.getElementById(id).addEventListener('input', updateDaySheet));
+        document.getElementById('btn-toggle-new-show').addEventListener('click', () => document.getElementById('new-show-form').classList.toggle('hidden'));
+        document.getElementById('btn-save-new-show').addEventListener('click', () => {
+            state.shows.unshift({
+                id: Date.now(),
+                cidade: document.getElementById('ns-cidade').value || 'Goiânia - GO',
+                evento: document.getElementById('ns-evento').value || 'Show Particular',
+                data: document.getElementById('ns-data').value || '2026-11-28',
+                horario: document.getElementById('ns-horario').value || '23:00',
+                cache: parseFloat(document.getElementById('ns-cache').value) || 20000,
+                status: document.getElementById('ns-status').value
+            });
+            state.selectedShowIndex = 0;
+            renderShowsList();
+            document.getElementById('new-show-form').classList.add('hidden');
+            showToast('Show adicionado!');
+        });
+
+        function renderChecklist() {
+            const c = document.getElementById('road-checklist');
+            c.innerHTML = '';
+            state.checklist.forEach((it, i) => {
+                const lbl = document.createElement('label');
+                lbl.className = 'flex items-start gap-2.5 p-2.5 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-zinc-700 transition cursor-pointer';
+                lbl.innerHTML = `
+                    <input type="checkbox" data-check="${i}" ${it.done ? 'checked' : ''} class="mt-0.5 w-4 h-4 rounded accent-amber-500 shrink-0">
+                    <span class="text-[11px] sm:text-xs text-zinc-300 ${it.done ? 'line-through text-zinc-500' : ''} leading-relaxed">${it.text}</span>
+                `;
+                c.appendChild(lbl);
+            });
+            c.querySelectorAll('[data-check]').forEach(cb => cb.addEventListener('change', () => {
+                state.checklist[parseInt(cb.getAttribute('data-check'), 10)].done = cb.checked;
+                renderChecklist();
+            }));
+            const done = state.checklist.filter(x => x.done).length;
+            document.getElementById('checklist-progress').textContent = `${done}/${state.checklist.length}`;
+        }
+        document.getElementById('btn-reset-checklist').addEventListener('click', () => { state.checklist.forEach(x => x.done = false); renderChecklist(); });
+
+        function updateFinancials() {
+            const bruto = parseFloat(document.getElementById('fin-bruto').value) || 0;
+            const banda = parseFloat(document.getElementById('fin-banda').value) || 0;
+            const log = parseFloat(document.getElementById('fin-logistica').value) || 0;
+            const pct = parseFloat(document.getElementById('fin-comissao').value) || 0;
+            const com = bruto * (pct / 100);
+            const desp = banda + log + com;
+            const liq = bruto - desp;
+            const caixa = Math.max(0, liq * 0.20);
+            document.getElementById('fin-despesas-out').textContent = '- ' + formatBRL(desp);
+            document.getElementById('fin-liquido-out').textContent = formatBRL(liq);
+            document.getElementById('fin-caixa-out').textContent = formatBRL(caixa);
+        }
+        ['fin-bruto','fin-banda','fin-logistica','fin-comissao'].forEach(id => document.getElementById(id).addEventListener('input', updateFinancials));
+
+        document.getElementById('btn-copy-daysheet').addEventListener('click', () => copyTextToClipboard(document.getElementById('ds-output').value, 'Day Sheet copiado!'));
+        document.getElementById('btn-wpp-daysheet').addEventListener('click', () => {
+            window.open('https://wa.me/?text=' + encodeURIComponent(document.getElementById('ds-output').value), '_blank', 'noopener,noreferrer');
+        });
+
+        // ===== SETLIST =====
+        function renderSetlist() {
+            const c = document.getElementById('setlist-container');
+            c.innerHTML = '';
+            const filtered = state.setlist.filter(s => state.setlistFilter === 'all' || s.cat === state.setlistFilter);
+            if (!filtered.length) { c.innerHTML = '<p class="text-xs text-zinc-500 text-center py-4 col-span-full">Nenhuma música nesta categoria.</p>'; return; }
+            filtered.forEach(s => {
+                const card = document.createElement('div');
+                card.className = 'p-3 rounded-2xl bg-zinc-900/90 border border-zinc-800 hover:border-amber-500/40 transition flex items-center justify-between gap-2';
+                card.innerHTML = `
+                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                        <div class="w-10 h-10 rounded-xl gold-gradient-bg flex items-center justify-center shrink-0">
+                            <span class="text-black font-black text-[11px]">${s.key}</span>
+                        </div>
+                        <div class="min-w-0">
+                            <p class="text-xs sm:text-sm font-bold text-white truncate">${s.title}</p>
+                            <p class="text-[10px] text-zinc-400 truncate">${s.note}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <span class="text-[10px] font-bold px-2 py-1 rounded-full bg-zinc-800 text-amber-400 whitespace-nowrap">${s.bpm}</span>
+                        <button data-del-song="${s.id}" class="text-zinc-600 hover:text-red-400 text-sm font-bold p-1">✕</button>
+                    </div>
+                `;
+                c.appendChild(card);
+            });
+            c.querySelectorAll('[data-del-song]').forEach(b => b.addEventListener('click', () => {
+                const id = parseInt(b.getAttribute('data-del-song'), 10);
+                state.setlist = state.setlist.filter(s => s.id !== id);
+                renderSetlist();
+            }));
+        }
+
+        document.querySelectorAll('.set-filter-btn').forEach(b => b.addEventListener('click', () => {
+            state.setlistFilter = b.getAttribute('data-setfilter');
+            document.querySelectorAll('.set-filter-btn').forEach(x => {
+                x.className = 'set-filter-btn px-2.5 py-1.5 rounded-xl text-[11px] font-semibold bg-zinc-900 text-zinc-300 border border-zinc-800';
+            });
+            b.className = 'set-filter-btn px-2.5 py-1.5 rounded-xl text-[11px] font-semibold bg-amber-500 text-black';
+            renderSetlist();
+        }));
+
+        document.getElementById('btn-add-song').addEventListener('click', () => {
+            const t = document.getElementById('new-song-title').value.trim();
+            const k = document.getElementById('new-song-key').value.trim() || 'C';
+            if (!t) { showToast('Digite o nome da música.'); return; }
+            state.setlist.push({ id: Date.now(), title: t, key: k, bpm: '120 BPM', cat: 'autoral', note: 'Adicionada' });
+            document.getElementById('new-song-title').value = '';
+            document.getElementById('new-song-key').value = '';
+            renderSetlist();
+            showToast('Adicionada!');
+        });
+
+        document.getElementById('btn-copy-setlist').addEventListener('click', () => {
+            const txt = state.setlist.map((s, i) => `${i+1}. ${s.title} [Tom: ${s.key}]`).join('\n');
+            copyTextToClipboard('🎸 SETLIST PH E MICHEL\n\n' + txt, 'Setlist copiada!');
+        });
+
+        function renderStageMode() {
+            const c = document.getElementById('stage-songs-list');
+            c.innerHTML = '';
+            state.setlist.forEach((s, i) => {
+                const card = document.createElement('div');
+                card.className = 'p-3 sm:p-5 rounded-2xl bg-zinc-900 border border-amber-500/30';
+                card.innerHTML = `
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold text-amber-400">#${i+1}</span>
+                        <span class="text-base sm:text-lg font-black text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-xl">TOM: ${s.key}</span>
+                    </div>
+                    <h3 class="text-base sm:text-xl font-black text-white leading-tight">${s.title}</h3>
+                    <p class="text-[10px] text-zinc-400 mt-1">${s.bpm} • ${s.note}</p>
+                `;
+                c.appendChild(card);
+            });
+        }
+        document.getElementById('btn-stage-mode').addEventListener('click', () => { renderStageMode(); document.getElementById('modal-stage').classList.remove('hidden'); });
+        document.getElementById('btn-close-stage').addEventListener('click', () => document.getElementById('modal-stage').classList.add('hidden'));
+
+        // ===== INFO MODALS =====
+        const infos = {
+            rider: { title: 'Rider Técnico & Mapa de Palco', body: `
+                <div><p class="font-bold text-amber-400 mb-1">🎛️ PA:</p><ul class="list-disc list-inside space-y-0.5 ml-1"><li>8 line array + 4 subs</li><li>Mesa digital (Midas M32 / X32)</li><li>3 SM58 + 2 SM57 + DI violões</li></ul></div>
+                <div><p class="font-bold text-amber-400 mb-1">🎤 Mapa (12):</p><ul class="list-disc list-inside space-y-0.5 ml-1"><li>Center: PH + Michel</li><li>Violão base + viola (esq.)</li><li>Sanfona + teclado (dir.)</li><li>Bateria + baixo (fundo)</li><li>Metais: 2 trompetes + 1 sax</li></ul></div>
+                <div><p class="font-bold text-amber-400 mb-1">💡 Luz:</p><ul class="list-disc list-inside space-y-0.5 ml-1"><li>8 moving heads mín.</li><li>12 par LED + máquina fumaça</li><li>Telão 6x3m P3.9 (opcional)</li></ul></div>
+            ` },
+            camarim: { title: 'Camarim & Hotel', body: `
+                <div><p class="font-bold text-amber-400 mb-1">🍽️ Camarim (12):</p><ul class="list-disc list-inside space-y-0.5 ml-1"><li>12 águas 500ml</li><li>Refrigerante + suco</li><li>Frutas + sanduíches</li><li>Gelo + copos + toalhas</li><li>Café + leite + açúcar</li></ul></div>
+                <div><p class="font-bold text-amber-400 mb-1">🏨 Hotel:</p><ul class="list-disc list-inside space-y-0.5 ml-1"><li>6 quartos (2 triplos, 4 duplos)</li><li>Check-in preferencial</li><li>Café incluso</li><li>Estacionamento van</li></ul></div>
+                <div><p class="font-bold text-amber-400 mb-1">🚐 Transporte:</p><ul class="list-disc list-inside space-y-0.5 ml-1"><li>Van executiva + ar</li><li>Motorista profissional</li><li>Seguro equipamentos</li></ul></div>
+            ` }
+        };
+        ['rider', 'camarim'].forEach(k => {
+            document.getElementById('btn-modal-' + k).addEventListener('click', () => {
+                document.getElementById('modal-info-title').textContent = infos[k].title;
+                document.getElementById('modal-info-body').innerHTML = infos[k].body;
+                document.getElementById('modal-info').classList.remove('hidden');
+            });
+        });
+        document.getElementById('btn-close-info').addEventListener('click', () => document.getElementById('modal-info').classList.add('hidden'));
+        document.getElementById('modal-info').addEventListener('click', (e) => { if (e.target.id === 'modal-info') document.getElementById('modal-info').classList.add('hidden'); });
+        document.getElementById('btn-copy-info-modal').addEventListener('click', () => {
+            const t = document.getElementById('modal-info-title').textContent;
+            copyTextToClipboard(`${t}\n\n${document.getElementById('modal-info-body').innerText}`, 'Info copiada!');
+        });
+
+        // ===== KEYBOARD =====
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('modal-info').classList.add('hidden');
+                document.getElementById('modal-stage').classList.add('hidden');
+                document.getElementById('modal-teleprompter').classList.add('hidden');
+                if (state.tpInterval) { clearInterval(state.tpInterval); state.tpInterval = null; }
+            }
+        });
+
+        // ===== INIT =====
+        function init() {
+            updateQuoteCalculation();
+            generatePHScript();
+            renderContentBoard();
+            renderShowsList();
+            renderChecklist();
+            updateFinancials();
+            renderSetlist();
+            updateDaySheet();
+        }
+
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+        else init();
+    </script>
 </body>
 </html>
